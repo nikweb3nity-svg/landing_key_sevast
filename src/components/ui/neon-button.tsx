@@ -9,6 +9,8 @@ const neonButtonVariants = cva(
       variant: {
         solid:
           "border-civic-300/35 bg-civic-500/92 text-white shadow-[0_0_28px_rgba(37,99,235,0.34)] hover:border-civic-100/65 hover:bg-civic-400",
+        call:
+          "border-civic-100/70 bg-gradient-to-r from-civic-400 via-blue-500 to-civic-500 text-white shadow-[0_0_34px_rgba(37,99,235,0.56),0_10px_34px_rgba(15,23,42,0.28)] ring-1 ring-civic-200/30 hover:-translate-y-0.5 hover:border-white/80 hover:shadow-[0_0_46px_rgba(96,165,250,0.7),0_14px_40px_rgba(15,23,42,0.34)]",
         glass:
           "border-civic-200/25 bg-white/8 text-civic-50 backdrop-blur-xl hover:border-civic-100/50 hover:bg-white/12",
         subtle:
@@ -42,6 +44,7 @@ function NeonGlow({ neon }: { neon?: boolean }) {
       <span className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-civic-100 to-transparent opacity-60 transition duration-500 group-hover:inset-x-3 group-hover:opacity-100" />
       <span className="pointer-events-none absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-civic-300 to-transparent opacity-70 transition duration-500 group-hover:inset-x-4 group-hover:opacity-100" />
       <span className="pointer-events-none absolute -inset-px rounded-full bg-civic-300/0 blur-xl transition duration-500 group-hover:bg-civic-300/16" />
+      <span className="pointer-events-none absolute -left-10 top-0 h-full w-10 -skew-x-12 bg-white/28 blur-sm transition-transform duration-700 group-hover:translate-x-[240px]" />
     </>
   );
 }

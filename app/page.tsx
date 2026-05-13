@@ -66,7 +66,7 @@ function CtaButtons({ compact = false }: { compact?: boolean }) {
     <div className={`flex ${compact ? "flex-col" : "flex-col sm:flex-row"} gap-3`}>
       <NeonButtonLink
         href={landingContent.phoneHref}
-        variant="solid"
+        variant="call"
         size="md"
       >
         <Phone className="h-5 w-5" />
@@ -402,7 +402,7 @@ export default function Home() {
                       </NeonButton>
                       <NeonButtonLink
                         href={landingContent.phoneHref}
-                        variant="glass"
+                        variant="call"
                         size="sm"
                         full
                         onClick={(event) => event.stopPropagation()}
@@ -630,7 +630,7 @@ export default function Home() {
       <div className="fixed bottom-5 right-5 z-50 hidden lg:block">
         <NeonButtonLink
           href={landingContent.phoneHref}
-          variant="solid"
+          variant="call"
           size="lg"
         >
           <Phone className="h-5 w-5" />
@@ -641,7 +641,7 @@ export default function Home() {
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-graphite-950/90 p-3 backdrop-blur-xl lg:hidden">
         <NeonButtonLink
           href={landingContent.phoneHref}
-          variant="solid"
+          variant="call"
           size="lg"
           full
         >

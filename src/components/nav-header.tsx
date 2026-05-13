@@ -52,7 +52,7 @@ function NavHeader() {
         <div className="hidden min-w-fit items-center gap-3 md:flex">
           <NeonButtonLink
             href={landingContent.phoneHref}
-            variant="glass"
+            variant="call"
             size="sm"
           >
             <Phone className="h-4 w-4" />
@@ -93,7 +93,7 @@ function NavHeader() {
             <NeonButtonLink
               href={landingContent.phoneHref}
               className="mt-2"
-              variant="solid"
+              variant="call"
               size="md"
               full
               onClick={() => setMobileOpen(false)}
