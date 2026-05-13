@@ -19,9 +19,9 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import NavHeader from "@/components/nav-header";
 import { TiltCard } from "@/components/tilt-card";
 import { landingContent } from "@/data/landing";
-import { privacyPolicy } from "@/data/legal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -214,32 +214,7 @@ export default function Home() {
     <main className="min-h-screen overflow-hidden bg-graphite-950 text-slate-100">
       <div className="blue-grid pointer-events-none fixed inset-0 opacity-70" />
 
-      <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-graphite-950/76 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 md:px-8">
-          <a href="#hero" className="flex items-center gap-3">
-            <span className="grid h-10 w-10 place-items-center rounded-xl bg-civic-500 text-white shadow-glow">
-              <KeyRound className="h-5 w-5" />
-            </span>
-            <span>
-              <span className="block font-display text-lg font-semibold text-white">{landingContent.brand}</span>
-              <span className="block text-xs font-semibold uppercase text-civic-200">Севастополь 24/7</span>
-            </span>
-          </a>
-          <nav className="hidden items-center gap-6 text-sm font-semibold text-slate-300 lg:flex">
-            <a className="transition hover:text-white" href="#services">Услуги</a>
-            <a className="transition hover:text-white" href="#prices">Цены</a>
-            <a className="transition hover:text-white" href="#process">Как работаем</a>
-            <a className="transition hover:text-white" href="#contacts">Контакты</a>
-          </nav>
-          <a
-            href={landingContent.phoneHref}
-            className="hidden items-center gap-2 rounded-xl border border-civic-300/25 bg-civic-500/12 px-4 py-2 text-sm font-bold text-civic-100 transition hover:bg-civic-500/20 md:inline-flex"
-          >
-            <Phone className="h-4 w-4" />
-            {landingContent.phone}
-          </a>
-        </div>
-      </header>
+      <NavHeader />
 
       <section id="hero" className="relative px-5 pb-20 pt-28 md:px-8 md:pb-28 md:pt-36">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
