@@ -5,6 +5,7 @@ import "@fontsource/manrope/700.css";
 import "@fontsource/space-grotesk/600.css";
 import type { Metadata } from "next";
 import "./globals.css";
+import CookieConsent from "@/components/cookie-consent";
 import { metadataConfig } from "@/data/landing";
 
 export const metadata: Metadata = metadataConfig;
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body>{children}</body>
+      <body>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }
