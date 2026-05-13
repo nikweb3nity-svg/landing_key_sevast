@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import {
+  ArrowLeft,
   ArrowRight,
   BadgeCheck,
   Car,
@@ -14,7 +15,6 @@ import {
   MessageCircle,
   Phone,
   ShieldCheck,
-  Star,
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
@@ -244,9 +244,24 @@ function LeadForm() {
 }
 
 export default function Home() {
+  const reviewsTrackRef = useRef<HTMLDivElement>(null);
+
   function handleServiceLead(serviceTitle: string) {
     window.dispatchEvent(new CustomEvent("lead-service-select", { detail: serviceTitle }));
     document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  function scrollReviews(direction: "prev" | "next") {
+    const track = reviewsTrackRef.current;
+
+    if (!track) {
+      return;
+    }
+
+    track.scrollBy({
+      left: direction === "next" ? 380 : -380,
+      behavior: "smooth",
+    });
   }
 
   return (
@@ -512,25 +527,70 @@ export default function Home() {
 
       <section className="px-5 py-20 md:px-8">
         <div className="mx-auto max-w-7xl">
-          <SectionTitle eyebrow="Отзывы" title="Клиенты ценят скорость и спокойный подход" />
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-4 text-xs font-bold uppercase tracking-[0.42em] text-civic-200/80">Отзывы клиентов</p>
+              <h2 className="max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl">
+                Что говорят <span className="text-slate-500">о работе</span> мастера
+              </h2>
+            </div>
+            <div className="flex gap-3">
+              <button
+                type="button"
+                className="grid h-12 w-12 place-items-center rounded-full border border-white/12 bg-white/8 text-white transition hover:border-civic-200/45 hover:bg-civic-500 focus:outline-none focus:ring-2 focus:ring-civic-200"
+                aria-label="Показать предыдущие отзывы"
+                onClick={() => scrollReviews("prev")}
+              >
+                <ArrowLeft className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                className="grid h-12 w-12 place-items-center rounded-full border border-civic-200/35 bg-civic-500 text-white shadow-soft-blue transition hover:bg-civic-400 focus:outline-none focus:ring-2 focus:ring-civic-200"
+                aria-label="Показать следующие отзывы"
+                onClick={() => scrollReviews("next")}
+              >
+                <ArrowRight className="h-5 w-5" />
+              </button>
+            </div>
+          </div>
+
+          <div
+            ref={reviewsTrackRef}
+            className="-mx-5 flex snap-x gap-4 overflow-x-auto px-5 pb-4 [scrollbar-width:none] md:mx-0 md:px-0 [&::-webkit-scrollbar]:hidden"
+          >
             {landingContent.reviews.map((review, index) => (
               <motion.figure
                 key={review.name}
-                className="glass-line rounded-2xl p-6"
+                className="min-h-[430px] w-[82vw] shrink-0 snap-start rounded-[2rem] border border-civic-200/15 bg-slate-100/[0.045] p-6 backdrop-blur-xl transition hover:border-civic-200/35 hover:bg-white/[0.075] sm:w-[360px] md:p-7"
                 initial="hidden"
                 whileInView="show"
-                viewport={{ once: true }}
+                viewport={{ once: true, amount: 0.2 }}
                 variants={fadeUp}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
+                transition={{ duration: 0.45, delay: (index % 3) * 0.06 }}
               >
-                <div className="mb-5 flex gap-1 text-civic-300">
-                  {Array.from({ length: 5 }).map((_, starIndex) => (
-                    <Star key={starIndex} className="h-4 w-4 fill-current" />
-                  ))}
+                <div className="flex items-center justify-between gap-4">
+                  <Image
+                    src={review.avatar}
+                    alt={`Фото клиента ${review.name}`}
+                    width={64}
+                    height={64}
+                    className="h-14 w-14 rounded-full border border-white/15 object-cover"
+                  />
+                  <div className="rounded-full border border-white/12 bg-graphite-950/52 px-4 py-2 text-right text-xs font-bold uppercase tracking-[0.18em] text-civic-100">
+                    Проверено
+                  </div>
                 </div>
-                <blockquote className="leading-7 text-slate-200">«{review.text}»</blockquote>
-                <figcaption className="mt-5 font-bold text-white">{review.name}</figcaption>
+
+                <div className="mt-12 text-5xl font-semibold leading-none text-civic-300/70">“</div>
+                <blockquote className="mt-6 text-2xl font-semibold leading-tight text-white md:text-[1.7rem]">
+                  {review.text}
+                </blockquote>
+
+                <figcaption className="mt-12 border-l border-civic-200/35 pl-4">
+                  <p className="font-bold text-white">{review.name}</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-300">{review.role}</p>
+                  <p className="text-sm leading-6 text-slate-500">{review.location}</p>
+                </figcaption>
               </motion.figure>
             ))}
           </div>
