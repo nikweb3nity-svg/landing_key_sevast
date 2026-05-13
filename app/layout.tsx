@@ -1,14 +1,16 @@
-import "@fontsource/manrope/400.css";
-import "@fontsource/manrope/500.css";
-import "@fontsource/manrope/600.css";
-import "@fontsource/manrope/700.css";
-import "@fontsource/space-grotesk/600.css";
 import type { Metadata } from "next";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import CookieConsent from "@/components/cookie-consent";
 import { metadataConfig } from "@/data/landing";
 
 export const metadata: Metadata = metadataConfig;
+
+const manrope = Manrope({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  variable: "--font-sans",
+});
 
 export default function RootLayout({
   children,
@@ -16,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className={manrope.variable}>
       <body>
         {children}
         <CookieConsent />

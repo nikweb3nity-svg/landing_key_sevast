@@ -3,8 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --font-sans: "Manrope";
-  --font-display: "Space Grotesk";
+  --font-display: var(--font-sans);
   --background: #050813;
   --foreground: #eef5ff;
 }

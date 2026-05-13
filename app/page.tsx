@@ -319,6 +319,7 @@ export default function Home() {
                 width={900}
                 height={620}
                 priority
+                sizes="(min-width: 1024px) 48vw, 100vw"
                 className="h-[420px] w-full object-cover md:h-[560px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-graphite-950 via-graphite-950/20 to-transparent" />
@@ -398,6 +399,7 @@ export default function Home() {
                       alt={service.title}
                       width={720}
                       height={420}
+                      sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
                       className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-graphite-950/80 to-transparent" />
@@ -574,6 +576,7 @@ export default function Home() {
                     alt={`Фото клиента ${review.name}`}
                     width={64}
                     height={64}
+                    sizes="56px"
                     className="h-14 w-14 rounded-full border border-white/15 object-cover"
                   />
                   <div className="rounded-full border border-white/12 bg-graphite-950/52 px-4 py-2 text-right text-xs font-bold uppercase tracking-[0.18em] text-civic-100">
