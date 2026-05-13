@@ -6,7 +6,7 @@ describe("landing content", () => {
     expect(landingContent.brand).toBe("Замок Эксперт");
     expect(landingContent.city).toBe("Севастополь");
     expect(landingContent.phone).toBe("+7 (979) 052-32-27");
-    expect(landingContent.telegram).toBe("@Dimon4888");
+    expect(landingContent.telegram).toBe("@Andree92");
 
     expect(landingContent.services.map((service) => service.title)).toEqual([
       "Вскрытие дверей",

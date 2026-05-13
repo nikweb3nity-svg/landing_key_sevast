@@ -27,8 +27,8 @@ export const landingContent = {
   city: "Севастополь",
   phone: "+7 (979) 052-32-27",
   phoneHref: "tel:+79790523227",
-  telegram: "@Dimon4888",
-  telegramHref: "https://t.me/Dimon4888",
+  telegram: "@Andree92",
+  telegramHref: "https://t.me/Andree92",
   heroImage: "/images/door-master.png",
   badges: ["24/7 без выходных", "Выезд по Севастополю", "Без повреждений", "Оплата после результата"],
   stats: [

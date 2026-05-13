@@ -5,7 +5,7 @@ export const privacyPolicy = {
     name: "Замок Эксперт",
     site: "zamok-expert.ru",
     phone: "+7 (979) 052-32-27",
-    telegram: "@Dimon4888",
+    telegram: "@Andree92",
   },
   consentText:
     "я даю согласие на обработку персональных данных в соответствии с политикой конфиденциальности",
