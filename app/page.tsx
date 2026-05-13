@@ -313,9 +313,11 @@ export default function Home() {
                 className="group absolute bottom-5 left-5 right-5 rounded-2xl border border-white/12 bg-graphite-950/72 p-5 backdrop-blur-xl transition hover:border-civic-200/45 hover:bg-civic-950/82 focus:outline-none focus:ring-2 focus:ring-civic-300"
               >
                 <div className="flex items-center justify-between gap-4">
-                  <div>
+                  <div className="min-w-0">
                     <p className="text-sm font-semibold text-civic-200">Срочный вызов мастера</p>
-                    <p className="mt-1 text-2xl font-bold text-white">{landingContent.phone}</p>
+                    <p className="mt-1 whitespace-nowrap text-[clamp(1.18rem,5.9vw,1.5rem)] font-bold text-white">
+                      {landingContent.phone}
+                    </p>
                   </div>
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-civic-500 transition group-hover:bg-civic-400">
                     <Phone className="h-6 w-6" />
