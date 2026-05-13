@@ -21,6 +21,7 @@ import Image from "next/image";
 import Link from "next/link";
 import NavHeader from "@/components/nav-header";
 import { TiltCard } from "@/components/tilt-card";
+import { NeonButton, NeonButtonLink } from "@/components/ui/neon-button";
 import { landingContent } from "@/data/landing";
 
 const fadeUp = {
@@ -63,20 +64,22 @@ function SectionTitle({
 function CtaButtons({ compact = false }: { compact?: boolean }) {
   return (
     <div className={`flex ${compact ? "flex-col" : "flex-col sm:flex-row"} gap-3`}>
-      <a
+      <NeonButtonLink
         href={landingContent.phoneHref}
-        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-civic-500 px-6 py-3 text-base font-bold text-white shadow-soft-blue transition hover:bg-civic-400 focus:outline-none focus:ring-2 focus:ring-civic-200"
+        variant="solid"
+        size="md"
       >
         <Phone className="h-5 w-5" />
         Позвонить сейчас
-      </a>
-      <a
+      </NeonButtonLink>
+      <NeonButtonLink
         href={landingContent.telegramHref}
-        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-civic-200/25 bg-white/8 px-6 py-3 text-base font-bold text-civic-50 backdrop-blur transition hover:border-civic-200/45 hover:bg-white/12 focus:outline-none focus:ring-2 focus:ring-civic-200"
+        variant="glass"
+        size="md"
       >
         <MessageCircle className="h-5 w-5" />
         Написать в Telegram
-      </a>
+      </NeonButtonLink>
     </div>
   );
 }
@@ -213,14 +216,16 @@ function LeadForm() {
           </Link>
         </span>
       </label>
-      <button
+      <NeonButton
         type="submit"
         disabled={isLoading}
-        className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-civic-500 px-6 py-3 font-bold text-white shadow-soft-blue transition hover:bg-civic-400 disabled:cursor-not-allowed disabled:opacity-65"
+        full
+        variant="solid"
+        size="md"
       >
         {isLoading ? "Отправляем..." : "Отправить заявку"}
         {!isLoading ? <ArrowRight className="h-5 w-5" /> : null}
-      </button>
+      </NeonButton>
       {message ? (
         <p
           className={`rounded-xl border px-4 py-3 text-sm font-semibold ${
@@ -382,9 +387,11 @@ export default function Home() {
                     <h3 className="text-xl font-bold text-white">{service.title}</h3>
                     <p className="mt-3 leading-7 text-slate-300">{service.text}</p>
                     <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                      <button
+                      <NeonButton
                         type="button"
-                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-civic-500 px-4 py-2 text-sm font-bold text-white shadow-soft-blue transition hover:bg-civic-400"
+                        variant="solid"
+                        size="sm"
+                        full
                         onClick={(event) => {
                           event.stopPropagation();
                           handleServiceLead(service.title);
@@ -392,15 +399,17 @@ export default function Home() {
                       >
                         Оставить заявку
                         <ArrowRight className="h-4 w-4" />
-                      </button>
-                      <a
+                      </NeonButton>
+                      <NeonButtonLink
                         href={landingContent.phoneHref}
-                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-civic-200/25 bg-white/8 px-4 py-2 text-sm font-bold text-civic-50 transition hover:border-civic-200/45 hover:bg-white/12"
+                        variant="glass"
+                        size="sm"
+                        full
                         onClick={(event) => event.stopPropagation()}
                       >
                         <Phone className="h-4 w-4" />
                         Позвонить
-                      </a>
+                      </NeonButtonLink>
                     </div>
                   </div>
                 </motion.article>
@@ -619,23 +628,26 @@ export default function Home() {
       </footer>
 
       <div className="fixed bottom-5 right-5 z-50 hidden lg:block">
-        <a
+        <NeonButtonLink
           href={landingContent.phoneHref}
-          className="inline-flex items-center gap-3 rounded-2xl bg-civic-500 px-5 py-4 font-bold text-white shadow-glow transition hover:bg-civic-400"
+          variant="solid"
+          size="lg"
         >
           <Phone className="h-5 w-5" />
           Срочный вызов
-        </a>
+        </NeonButtonLink>
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 z-50 border-t border-white/10 bg-graphite-950/90 p-3 backdrop-blur-xl lg:hidden">
-        <a
+        <NeonButtonLink
           href={landingContent.phoneHref}
-          className="flex min-h-14 items-center justify-center gap-3 rounded-xl bg-civic-500 text-base font-bold text-white shadow-soft-blue"
+          variant="solid"
+          size="lg"
+          full
         >
           <Phone className="h-5 w-5" />
           Позвонить: {landingContent.phone}
-        </a>
+        </NeonButtonLink>
       </div>
     </main>
   );

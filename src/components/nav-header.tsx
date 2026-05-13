@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { KeyRound, Menu, Phone, X } from "lucide-react";
+import { NeonButtonLink } from "@/components/ui/neon-button";
 import { landingContent } from "@/data/landing";
 import { cn } from "@/lib/utils";
 
@@ -49,13 +50,14 @@ function NavHeader() {
         </nav>
 
         <div className="hidden min-w-fit items-center gap-3 md:flex">
-          <a
+          <NeonButtonLink
             href={landingContent.phoneHref}
-            className="inline-flex items-center gap-2 rounded-full border border-civic-300/25 bg-civic-500/12 px-4 py-2 text-sm font-bold text-civic-100 transition hover:bg-civic-500/20"
+            variant="glass"
+            size="sm"
           >
             <Phone className="h-4 w-4" />
             {landingContent.phone}
-          </a>
+          </NeonButtonLink>
         </div>
 
         <button
@@ -88,14 +90,17 @@ function NavHeader() {
                 {item.label}
               </a>
             ))}
-            <a
+            <NeonButtonLink
               href={landingContent.phoneHref}
-              className="mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-civic-500 px-4 py-3 text-sm font-bold text-white"
+              className="mt-2"
+              variant="solid"
+              size="md"
+              full
               onClick={() => setMobileOpen(false)}
             >
               <Phone className="h-4 w-4" />
               {landingContent.phone}
-            </a>
+            </NeonButtonLink>
           </div>
         </motion.nav>
       ) : null}
