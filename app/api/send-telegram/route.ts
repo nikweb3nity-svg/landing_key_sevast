@@ -25,16 +25,26 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Telegram не настроен на сервере." }, { status: 500 });
   }
 
-  const telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      chat_id: chatId,
-      text: formatTelegramLeadMessage(lead),
-    }),
-  });
+  let telegramResponse: Response;
+
+  try {
+    telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: formatTelegramLeadMessage(lead),
+      }),
+    });
+  } catch (error) {
+    console.error("Telegram sendMessage network error:", error);
+    return NextResponse.json(
+      { error: "Telegram временно недоступен. Позвоните нам напрямую." },
+      { status: 502 },
+    );
+  }
 
   if (!telegramResponse.ok) {
     const details = await telegramResponse.text();
