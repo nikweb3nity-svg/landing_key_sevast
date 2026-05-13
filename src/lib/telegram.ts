@@ -2,6 +2,7 @@ export interface TelegramLead {
   name: string;
   phone: string;
   comment: string;
+  consent: true;
 }
 
 export function normalizeTelegramLead(input: unknown): TelegramLead | null {
@@ -13,8 +14,9 @@ export function normalizeTelegramLead(input: unknown): TelegramLead | null {
   const name = normalizeField(data.name);
   const phone = normalizeField(data.phone);
   const comment = normalizeField(data.comment) || "Без комментария";
+  const consent = data.consent === true;
 
-  if (!name || !phone) {
+  if (!name || !phone || !consent) {
     return null;
   }
 
@@ -22,6 +24,7 @@ export function normalizeTelegramLead(input: unknown): TelegramLead | null {
     name,
     phone,
     comment,
+    consent,
   };
 }
 

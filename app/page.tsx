@@ -18,8 +18,10 @@ import {
   Wrench,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { TiltCard } from "@/components/tilt-card";
 import { landingContent } from "@/data/landing";
+import { privacyPolicy } from "@/data/legal";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -86,6 +88,7 @@ function LeadForm() {
     name: "",
     phone: "",
     comment: "",
+    consent: false,
   });
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -109,7 +112,7 @@ function LeadForm() {
 
       setStatus("success");
       setMessage("Заявка отправлена. Мастер скоро свяжется с вами.");
-      setForm({ name: "", phone: "", comment: "" });
+      setForm({ name: "", phone: "", comment: "", consent: false });
     } catch (error) {
       setStatus("error");
       setMessage(error instanceof Error ? error.message : "Не удалось отправить заявку.");
@@ -166,6 +169,22 @@ function LeadForm() {
           placeholder="Что случилось и куда приехать"
         />
       </div>
+      <label className="flex items-start gap-3 rounded-xl border border-white/10 bg-graphite-950/48 p-4 text-xs leading-5 text-slate-300">
+        <input
+          name="consent"
+          type="checkbox"
+          required
+          checked={form.consent}
+          onChange={(event) => setForm((current) => ({ ...current, consent: event.target.checked }))}
+          className="mt-1 h-4 w-4 shrink-0 rounded border-white/20 bg-graphite-950 text-civic-500 accent-civic-500"
+        />
+        <span>
+          я даю согласие на обработку персональных данных в соответствии с{" "}
+          <Link className="font-semibold text-civic-200 underline-offset-4 hover:underline" href="/privacy">
+            политикой конфиденциальности
+          </Link>
+        </span>
+      </label>
       <button
         type="submit"
         disabled={isLoading}
@@ -539,6 +558,23 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <footer className="border-t border-white/10 px-5 py-8 text-sm text-slate-400 md:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="font-semibold text-slate-200">{landingContent.brand}</p>
+            <p className="mt-1">Служба аварийного вскрытия замков в Севастополе</p>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <Link className="transition hover:text-white" href="/privacy">
+              Политика конфиденциальности
+            </Link>
+            <a className="transition hover:text-white" href={landingContent.phoneHref}>
+              {landingContent.phone}
+            </a>
+          </div>
+        </div>
+      </footer>
 
       <div className="fixed bottom-5 right-5 z-50 hidden lg:block">
         <a
