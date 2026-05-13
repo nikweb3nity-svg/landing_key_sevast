@@ -645,8 +645,10 @@ export default function Home() {
           size="lg"
           full
         >
-          <Phone className="h-5 w-5" />
-          Позвонить: {landingContent.phone}
+          <Phone className="h-5 w-5 shrink-0" />
+          <span className="min-w-0 whitespace-nowrap text-[clamp(0.86rem,4.25vw,1rem)]">
+            Позвонить: {landingContent.phone}
+          </span>
         </NeonButtonLink>
       </div>
     </main>
