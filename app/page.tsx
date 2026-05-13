@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useEffect, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -91,6 +91,34 @@ function LeadForm() {
     consent: false,
   });
 
+  useEffect(() => {
+    function handleServiceSelect(event: Event) {
+      const serviceTitle = (event as CustomEvent<string>).detail;
+
+      if (!serviceTitle) {
+        return;
+      }
+
+      setStatus("idle");
+      setMessage(`Выбрана услуга: ${serviceTitle}. Оставьте телефон, и мастер свяжется с вами.`);
+      setForm((current) => {
+        const serviceLine = `Услуга: ${serviceTitle}`;
+        const comment = current.comment.trim();
+
+        return {
+          ...current,
+          comment: comment && !comment.includes(serviceLine) ? `${serviceLine}\n${comment}` : serviceLine,
+        };
+      });
+
+      window.setTimeout(() => document.getElementById("lead-phone")?.focus(), 450);
+    }
+
+    window.addEventListener("lead-service-select", handleServiceSelect);
+
+    return () => window.removeEventListener("lead-service-select", handleServiceSelect);
+  }, []);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setStatus("loading");
@@ -122,7 +150,7 @@ function LeadForm() {
   const isLoading = status === "loading";
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
+    <form id="lead-form" className="space-y-4 scroll-mt-28" onSubmit={handleSubmit}>
       <div>
         <label className="mb-2 block text-sm font-semibold text-civic-100" htmlFor="lead-name">
           Имя
@@ -210,6 +238,11 @@ function LeadForm() {
 }
 
 export default function Home() {
+  function handleServiceLead(serviceTitle: string) {
+    window.dispatchEvent(new CustomEvent("lead-service-select", { detail: serviceTitle }));
+    document.getElementById("lead-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   return (
     <main className="min-h-screen overflow-hidden bg-graphite-950 text-slate-100">
       <div className="blue-grid pointer-events-none fixed inset-0 opacity-70" />
@@ -312,12 +345,21 @@ export default function Home() {
               return (
                 <motion.article
                   key={service.title}
-                  className="group overflow-hidden rounded-2xl border border-white/10 bg-white/7 transition hover:border-civic-300/35 hover:bg-white/10"
+                  role="button"
+                  tabIndex={0}
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-white/10 bg-white/7 transition hover:border-civic-300/35 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-civic-300"
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true, amount: 0.22 }}
                   variants={fadeUp}
                   transition={{ duration: 0.45, delay: (index % 3) * 0.06 }}
+                  onClick={() => handleServiceLead(service.title)}
+                  onKeyDown={(event) => {
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      handleServiceLead(service.title);
+                    }
+                  }}
                 >
                   <div className="relative h-52 overflow-hidden">
                     <Image
@@ -335,6 +377,27 @@ export default function Home() {
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-white">{service.title}</h3>
                     <p className="mt-3 leading-7 text-slate-300">{service.text}</p>
+                    <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                      <button
+                        type="button"
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-civic-500 px-4 py-2 text-sm font-bold text-white shadow-soft-blue transition hover:bg-civic-400"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          handleServiceLead(service.title);
+                        }}
+                      >
+                        Оставить заявку
+                        <ArrowRight className="h-4 w-4" />
+                      </button>
+                      <a
+                        href={landingContent.phoneHref}
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-civic-200/25 bg-white/8 px-4 py-2 text-sm font-bold text-civic-50 transition hover:border-civic-200/45 hover:bg-white/12"
+                        onClick={(event) => event.stopPropagation()}
+                      >
+                        <Phone className="h-4 w-4" />
+                        Позвонить
+                      </a>
+                    </div>
                   </div>
                 </motion.article>
               );
