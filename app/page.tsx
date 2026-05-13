@@ -22,6 +22,7 @@ import Link from "next/link";
 import NavHeader from "@/components/nav-header";
 import { TiltCard } from "@/components/tilt-card";
 import { NeonButton, NeonButtonLink } from "@/components/ui/neon-button";
+import { ShimmerText } from "@/components/ui/shimmer-text";
 import { landingContent } from "@/data/landing";
 
 const fadeUp = {
@@ -262,12 +263,16 @@ export default function Home() {
               Аварийный выезд в день обращения
             </div>
             <h1 className="max-w-4xl text-4xl font-semibold leading-tight text-white md:text-6xl">
-              Вскрытие замков в Севастополе без лишнего шума и повреждений
+              <ShimmerText duration={3.2} delay={0.45}>
+                Вскрытие замков в Севастополе без лишнего шума и повреждений
+              </ShimmerText>
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
-              {landingContent.brand} помогает срочно открыть дверь, автомобиль, сейф или гараж.
-              Мастер приезжает с профессиональным инструментом, называет цену до начала работ и
-              действует аккуратно.
+              <ShimmerText className="text-slate-300 [--shimmer-contrast:rgba(191,219,254,0.9)]" duration={4.2} delay={1.1}>
+                {landingContent.brand} помогает срочно открыть дверь, автомобиль, сейф или гараж.
+                Мастер приезжает с профессиональным инструментом, называет цену до начала работ и
+                действует аккуратно.
+              </ShimmerText>
             </p>
             <div className="mt-8">
               <CtaButtons />
