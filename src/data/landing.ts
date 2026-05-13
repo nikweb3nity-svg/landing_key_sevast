@@ -70,7 +70,7 @@ export const landingContent = {
     {
       title: "Вскрытие гаражей",
       text: "Открытие гаражных замков, навесных механизмов и ворот без грубых решений.",
-      image: "/images/door-lock-metal.png",
+      image: "/images/garage-padlock.jpg",
     },
   ],
   prices: [
