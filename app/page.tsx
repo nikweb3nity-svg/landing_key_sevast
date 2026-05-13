@@ -297,17 +297,21 @@ export default function Home() {
                 className="h-[420px] w-full object-cover md:h-[560px]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-graphite-950 via-graphite-950/20 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 rounded-2xl border border-white/12 bg-graphite-950/72 p-5 backdrop-blur-xl">
+              <a
+                href={landingContent.phoneHref}
+                aria-label={`Позвонить ${landingContent.phone}`}
+                className="group absolute bottom-5 left-5 right-5 rounded-2xl border border-white/12 bg-graphite-950/72 p-5 backdrop-blur-xl transition hover:border-civic-200/45 hover:bg-civic-950/82 focus:outline-none focus:ring-2 focus:ring-civic-300"
+              >
                 <div className="flex items-center justify-between gap-4">
                   <div>
                     <p className="text-sm font-semibold text-civic-200">Срочный вызов мастера</p>
                     <p className="mt-1 text-2xl font-bold text-white">{landingContent.phone}</p>
                   </div>
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-civic-500">
+                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-civic-500 transition group-hover:bg-civic-400">
                     <Phone className="h-6 w-6" />
                   </div>
                 </div>
-              </div>
+              </a>
             </div>
           </motion.div>
         </div>
