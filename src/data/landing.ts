@@ -55,7 +55,7 @@ export const landingContent = {
     {
       title: "Замена замков",
       text: "Подбор и установка нового замка после поломки, переезда или утраты ключей.",
-      image: "/images/lock-pick-closeup.png",
+      image: "/images/zamena.jpg",
     },
     {
       title: "Установка замков",
@@ -65,7 +65,7 @@ export const landingContent = {
     {
       title: "Ремонт замков",
       text: "Диагностика заеданий, проворотов ключа, перекоса двери и износа механизма.",
-      image: "/images/door-master.png",
+      image: "/images/instant.jpg",
     },
     {
       title: "Вскрытие гаражей",
