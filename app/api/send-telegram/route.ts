@@ -3,6 +3,8 @@ import { formatTelegramLeadMessage, normalizeTelegramLead } from "@/lib/telegram
 
 export const runtime = "nodejs";
 
+const TELEGRAM_TIMEOUT_MS = 10_000;
+
 export async function POST(request: Request) {
   let payload: unknown;
 
@@ -26,10 +28,13 @@ export async function POST(request: Request) {
   }
 
   let telegramResponse: Response;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), TELEGRAM_TIMEOUT_MS);
 
   try {
     telegramResponse = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
       method: "POST",
+      signal: controller.signal,
       headers: {
         "Content-Type": "application/json",
       },
@@ -44,6 +49,8 @@ export async function POST(request: Request) {
       { error: "Telegram временно недоступен. Позвоните нам напрямую." },
       { status: 502 },
     );
+  } finally {
+    clearTimeout(timeout);
   }
 
   if (!telegramResponse.ok) {
