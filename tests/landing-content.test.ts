@@ -27,6 +27,7 @@ describe("landing content", () => {
   });
 
   it("defines SEO metadata for emergency lock opening in Sevastopol", () => {
+    expect(metadataConfig.metadataBase?.toString()).toBe("https://masterkey92.ru/");
     expect(metadataConfig.title).toContain("Вскрытие замков");
     expect(metadataConfig.title).toContain("Севастополь");
     expect(metadataConfig.description).toContain("24/7");

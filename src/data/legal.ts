@@ -3,7 +3,7 @@ export const privacyPolicy = {
   updatedAt: "13 мая 2026",
   operator: {
     name: "Замок Эксперт",
-    site: "zamok-expert.ru",
+    site: "masterkey92.ru",
     phone: "+7 (979) 052-32-27",
     telegram: "@Andree92",
   },
