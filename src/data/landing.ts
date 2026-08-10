@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 
 export const metadataConfig: Metadata = {
   metadataBase: new URL("https://masterkey92.ru"),
+  verification: {
+    yandex: "c9cfd1d5fc8c8244",
+  },
   title: "Замок Эксперт | Вскрытие замков Севастополь 24/7",
   description:
     "Аварийное вскрытие замков в Севастополе 24/7. Двери, автомобили, сейфы, гаражи, замена и ремонт замков. Звоните: +7 (979) 052-32-27.",
